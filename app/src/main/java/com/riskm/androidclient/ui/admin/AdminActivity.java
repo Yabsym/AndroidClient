@@ -29,7 +29,7 @@ public class AdminActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "如果您有问题，请联系我们，联系方式：99370680@qq.com", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
