@@ -16,6 +16,8 @@
     <string name="nav_header_subtitle">riskm.riskm@riskm.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="action_author">yang yuan</string>
+    <string name="action_email">99370680@qq.com</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
