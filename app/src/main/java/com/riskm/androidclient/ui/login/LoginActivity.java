@@ -3,6 +3,7 @@ package com.riskm.androidclient.ui.login;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.riskm.androidclient.R;
 import com.riskm.androidclient.ui.admin.AdminActivity;
 import com.riskm.androidclient.util.CallBackUtil;
 import com.riskm.androidclient.util.RealResponse;
+import com.riskm.androidclient.util.SessionRecord;
 import com.riskm.androidclient.util.UrlHttpUtil;
 
 import java.io.BufferedReader;
@@ -50,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(RealResponse response) {
                 realResponse = response;
+                String cookieTmp = SessionRecord.getCookieID(realResponse);
+                SessionRecord.setCookie(cookieTmp);
                 initFrom();
                 imgCaptcheUpdate();
             }
@@ -78,12 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    String getCookieID() {
-        String cookieDat = realResponse.cookies.get("Set-Cookie").toString();
-        cookieDat = cookieDat.substring(1, cookieDat.indexOf(";"));
-        return cookieDat;
 
-    }
 
     private void imgCaptcheUpdate() {
         Random random = new Random();
@@ -91,7 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         Map<String, String> mapDat = new HashMap<String, String>();
         mapDat.put("t", Integer.toString(random.nextInt()));
         Map<String, String> headMap = new HashMap<>();
-        headMap.put("Cookie", getCookieID());
+        //String cookieTmp = SessionRecord.getCookieID(realResponse);
+        //SessionRecord.setCookie(cookieTmp);
+        headMap.put("Cookie", SessionRecord.getCookie());
         UrlHttpUtil.post(urlCapche, null, headMap, new CallBackUtil.CallBackBitmap() {
             @Override
             public void onFailure(int code, String errorMessage) {
@@ -112,7 +113,9 @@ public class LoginActivity extends AppCompatActivity {
         mapDat.put("account", account.getText().toString());
         mapDat.put("captche", captche.getText().toString());
         Map<String, String> headMap = new HashMap<>();
-        headMap.put("Cookie", getCookieID());
+        //String cookieTmp = SessionRecord.getCookieID(realResponse);
+        //SessionRecord.setCookie(cookieTmp);
+        headMap.put("Cookie", SessionRecord.getCookie());
         UrlHttpUtil.post("http://10.0.3.2:8080/login/login", mapDat, headMap, new CallBackUtil.CallBackDefault() {
             @Override
             public void onFailure(int code, String errorMessage) {
@@ -145,6 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             System.out.println("error");
                         }
+                    }else{
+                        //TODO if login failed and then give some notice
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
