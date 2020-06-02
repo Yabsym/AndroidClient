@@ -1,5 +1,6 @@
-package com.riskm.androidclient.ui;
+package com.riskm.androidclient.ui.login;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.fastjson.JSON;
 import com.riskm.androidclient.R;
+import com.riskm.androidclient.ui.admin.AdminActivity;
 import com.riskm.androidclient.util.CallBackUtil;
 import com.riskm.androidclient.util.RealResponse;
 import com.riskm.androidclient.util.UrlHttpUtil;
@@ -136,8 +138,8 @@ public class LoginActivity extends AppCompatActivity {
                     if ("success".equals(map.get("state"))) {
                         if ("admin".equals(map.get("msg"))) {
                             System.out.println("admin success");
-                            //Intent intent = new Intent(LoginActivity.this,AdminActivity.class);
-                            // startActivity(intent);
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
                         } else if ("student".equals(map.get("msg"))) {
                             System.out.println("student success");
                         } else {
