@@ -10,44 +10,29 @@
             android:name="com.riskm.androidclient.ui.admin.ui.home.HomeFragment"
             android:label="@string/menu_home"
             tools:layout="@layout/fragment_home">
-
-        <action
-                android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-                app:destination="@id/nav_home_second"/>
     </fragment>
     <fragment
-            android:id="@+id/nav_home_second"
-            android:name="com.riskm.androidclient.ui.admin.ui.home.HomeSecondFragment"
-            android:label="@string/home_second"
-            tools:layout="@layout/fragment_home_second">
-        <action
-                android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-                app:destination="@id/nav_home"/>
-
-        <argument
-                android:name="myArg"
-                app:argType="string"/>
-    </fragment>
-
-    <fragment
-            android:id="@+id/nav_gallery"
-            android:name="com.riskm.androidclient.ui.admin.ui.gallery.GalleryFragment"
+            android:id="@+id/nav_student"
+            android:name="com.riskm.androidclient.ui.admin.ui.student.StudentFragment"
             android:label="@string/menu_student"
-            tools:layout="@layout/fragment_gallery"/>
-
-    <fragment
-            android:id="@+id/nav_score"
-            android:name="com.riskm.androidclient.ui.admin.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_score"
-            tools:layout="@layout/fragment_slideshow"/>
+            tools:layout="@layout/fragment_student">
+    </fragment>
     <fragment
             android:id="@+id/nav_log"
-            android:name="com.riskm.androidclient.ui.admin.ui.slideshow.SlideshowFragment"
+            android:name="com.riskm.androidclient.ui.admin.ui.log.LogFragment"
             android:label="@string/menu_log"
-            tools:layout="@layout/fragment_slideshow"/>
+            tools:layout="@layout/fragment_log">
+    </fragment>
+    <fragment
+            android:id="@+id/nav_score"
+            android:name="com.riskm.androidclient.ui.admin.ui.student.StudentFragment"
+            android:label="@string/menu_score"
+            tools:layout="@layout/fragment_score">
+    </fragment>
     <fragment
             android:id="@+id/nav_subject"
-            android:name="com.riskm.androidclient.ui.admin.ui.slideshow.SlideshowFragment"
+            android:name="com.riskm.androidclient.ui.admin.ui.student.StudentFragment"
             android:label="@string/menu_subject"
-            tools:layout="@layout/fragment_slideshow"/>
+            tools:layout="@layout/fragment_subject">
+    </fragment>
 </navigation>

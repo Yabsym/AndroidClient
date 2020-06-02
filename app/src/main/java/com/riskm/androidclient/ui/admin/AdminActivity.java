@@ -1,12 +1,15 @@
 package com.riskm.androidclient.ui.admin;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageView;
+import com.alibaba.fastjson.JSON;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -18,9 +21,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.riskm.androidclient.R;
+import com.riskm.androidclient.entity.Admin;
+import com.riskm.androidclient.ui.login.LoginActivity;
+import com.riskm.androidclient.util.CallBackUtil;
+import com.riskm.androidclient.util.RealResponse;
+import com.riskm.androidclient.util.SessionRecord;
+import com.riskm.androidclient.util.UrlHttpUtil;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -42,14 +56,10 @@ public class AdminActivity extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_log,
-                R.id.nav_student, R.id.nav_subject, R.id.nav_score,
-                R.id.imageView,R.id.adminAccount,R.id.adminName)
+                R.id.nav_home, R.id.nav_student, R.id.nav_subject,
+                R.id.nav_score, R.id.nav_log)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

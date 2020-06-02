@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText captche;
     private ImageView captcheImg;
     private UrlHttpUtil urlHttpUtil;
-    private RealResponse realResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(RealResponse response) {
-                realResponse = response;
-                String cookieTmp = SessionRecord.getCookieID(realResponse);
+                String cookieTmp = SessionRecord.getCookieID(response);
                 SessionRecord.setCookie(cookieTmp);
                 initFrom();
                 imgCaptcheUpdate();
@@ -126,12 +124,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(RealResponse response) {
                 imgCaptcheUpdate();
                 BufferedReader reader;
-
                 StringBuffer sbf = new StringBuffer();
-                realResponse = response;
                 try {
                     String strRead = null;
-                    reader = new BufferedReader(new InputStreamReader(realResponse.inputStream, StandardCharsets.UTF_8));
+                    reader = new BufferedReader(new InputStreamReader(response.inputStream, StandardCharsets.UTF_8));
                     while ((strRead = reader.readLine()) != null) {
                         sbf.append(strRead);
                         sbf.append("\r\n");
