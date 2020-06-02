@@ -1,6 +1,5 @@
 package com.riskm.androidclient.ui;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,10 @@ import com.riskm.androidclient.util.CallBackUtil;
 import com.riskm.androidclient.util.RealResponse;
 import com.riskm.androidclient.util.UrlHttpUtil;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;

@@ -1,2 +1,2 @@
-rootProject.name='AndroidClient'
+rootProject.name = 'AndroidClient'
 include ':app'
