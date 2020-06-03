@@ -1,5 +1,8 @@
 package com.riskm.androidclient.entity;
 
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.table.TableData;
+
 import java.util.Date;
 
 public class Log {

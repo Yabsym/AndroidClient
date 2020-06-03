@@ -1,52 +1,105 @@
 package com.riskm.androidclient.ui.admin.ui.log;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
+import com.alibaba.fastjson.JSON;
+import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.style.FontStyle;
+import com.bin.david.form.data.table.TableData;
 import com.riskm.androidclient.R;
-import com.riskm.androidclient.entity.Student;
+import com.riskm.androidclient.entity.Log;
+import com.riskm.androidclient.ui.admin.AdminActivity;
+import com.riskm.androidclient.ui.login.LoginActivity;
+import com.riskm.androidclient.util.CallBackUtil;
+import com.riskm.androidclient.util.RealResponse;
+import com.riskm.androidclient.util.UrlHttpUtil;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-public class LogFragment extends ListFragment {
-    private ListView listView;
+public class LogFragment extends Fragment {
+    private SmartTable tableLog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_log,container,false);
-        listView = root.findViewById(android.R.id.list);
+        View root = inflater.inflate(R.layout.fragment_log, container, false);
+        tableLog = root.findViewById(R.id.tableLog);
         creataTable();
-        return  root;
+        return root;
     }
 
-    private void creataTable(){
-        ArrayList<Log> logList;
-        String[] names = {"消息中心","家教记录","设置"};
-        ArrayAdapter viewDat = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
-        for (String name :
-                names) {
-            viewDat.add(name);
-        }
+    private void creataTable() {
 
-        listView.setAdapter(viewDat);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        UrlHttpUtil.post("http://10.0.3.2:8080/admin/AndroidGetLogDat", null, null, new CallBackUtil.CallBackDefault() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onFailure(int code, String errorMessage) {
+
+            }
+
+            @Override
+            public void onResponse(RealResponse response) {
+                BufferedReader reader;
+                StringBuffer sbf = new StringBuffer();
+                try {
+                    String strRead = null;
+                    reader = new BufferedReader(new InputStreamReader(response.inputStream, StandardCharsets.UTF_8));
+                    while ((strRead = reader.readLine()) != null) {
+                        sbf.append(strRead);
+                        sbf.append("\r\n");
+                    }
+                    reader.close();
+                    Map map = JSON.parseObject(sbf.toString());
+                    String dat = map.get("logDat").toString();
+                    //TODO what?
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                List<Log> logDat = new ArrayList<>();
+
+                Column<Integer> logID = new Column<>("日志流水号", "logID");
+                Column<String> context = new Column<>("操作内容", "context");
+                Column<String> operator = new Column<>("操作人", "operator");
+                Column<Date> time = new Column<>("时间", "time");
+                Column<String> type = new Column<>("类型", "type");
+                TableData<Log> tableData = new TableData<>("日志表", logDat, logID, context, operator, time, type);
+
+                tableLog.setTableData(tableData);
+                tableLog.getConfig().setContentStyle(new FontStyle(50, Color.RED));
+            }
+        });
+
+
+//
+//
+//
+//        ArrayList<Log> logList;
+//        String[] names = {"消息中心","家教记录","设置"};
+//        ArrayAdapter viewDat = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
+//        for (String name :
+//                names) {
+//            viewDat.add(name);
+//        }
+//
+//        listView.setAdapter(viewDat);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                StudentMapper studentMapper = new StudentMapper();
 ////                Adapter test = parent.getAdapter();
 //                System.out.println(studentList.get(position).toString());
@@ -84,7 +137,7 @@ public class LogFragment extends ListFragment {
 //
 //                //显示
 //                alterDiaglog.show();
-            }
-        });
+//            }
+//        });
     }
 }
