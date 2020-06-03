@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.admin.ui.log.LogFragment">
     <ListView
-            android:id="@+id/listLogDat"
+            android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
     </ListView>
