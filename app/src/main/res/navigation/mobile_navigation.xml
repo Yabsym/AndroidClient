@@ -25,7 +25,7 @@
     </fragment>
     <fragment
             android:id="@+id/nav_score"
-            android:name="com.riskm.androidclient.ui.admin.ui.student.StudentFragment"
+            android:name="com.riskm.androidclient.ui.admin.ui.score.ScoreFragment"
             android:label="@string/menu_score"
             tools:layout="@layout/fragment_score">
     </fragment>

@@ -1,40 +1,19 @@
 package com.riskm.androidclient.ui.admin;
 
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
-import android.widget.EditText;
-import android.widget.ImageView;
-import com.alibaba.fastjson.JSON;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
+import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.riskm.androidclient.R;
-import com.riskm.androidclient.entity.Admin;
-import com.riskm.androidclient.ui.login.LoginActivity;
-import com.riskm.androidclient.util.CallBackUtil;
-import com.riskm.androidclient.util.RealResponse;
-import com.riskm.androidclient.util.SessionRecord;
-import com.riskm.androidclient.util.UrlHttpUtil;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AdminActivity extends AppCompatActivity {
 

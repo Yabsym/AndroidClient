@@ -6,9 +6,11 @@ public class Course {
 
     public Course() {
     }
+
     public Course(Integer courseID) {
         this.courseID = courseID;
     }
+
     public Course(Integer courseID, String courseName) {
         this.courseID = courseID;
         this.courseName = courseName;

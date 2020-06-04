@@ -1,9 +1,12 @@
 package com.riskm.androidclient.entity;
 
-import com.bin.david.form.data.column.Column;
-import com.bin.david.form.data.table.TableData;
+import com.alibaba.fastjson.JSON;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class Log {
     private Integer logID;
@@ -18,6 +21,20 @@ public class Log {
         this.operator = operator;
         this.time = time;
         this.type = type;
+    }
+
+    public static List<Log> covertLog(List<String> data) {
+        List<Log> retValue = new ArrayList<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (String dat :
+                data) {
+            Map map = JSON.parseObject(dat);
+            Date date = new Date(Long.parseLong(map.get("time").toString()));
+            retValue.add(new Log(Integer.parseInt(map.get("logID").toString()),
+                    map.get("context").toString(), map.get("operator").toString(),
+                    date, map.get("type").toString()));
+        }
+        return retValue;
     }
 
     public Integer getLogID() {
