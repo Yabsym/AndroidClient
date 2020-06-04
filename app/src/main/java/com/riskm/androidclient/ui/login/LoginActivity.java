@@ -134,19 +134,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     reader.close();
                     Map map = JSON.parseObject(sbf.toString());
-                    if ("success".equals(map.get("state"))) {
-                        if ("admin".equals(map.get("msg"))) {
-                            System.out.println("admin success");
-                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                        } else if ("student".equals(map.get("msg"))) {
-                            System.out.println("student success");
-                        } else {
-                            System.out.println("error");
-                        }
-                    }else{
-                        //TODO if login failed and then give some notice
-                    }
+                   String logDat = map.get("logDat").toString();
+                   System.out.print(logDat);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
